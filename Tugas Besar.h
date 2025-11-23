@@ -2,15 +2,18 @@
 #define TUGAS_BESAR_H_INCLUDED
 #include <iostream>
 
-typedef lagu infotype;
+using namespace std;
+
 typedef struct elmlist *address;
 
 struct lagu {
-    int id;
-    char judul;
-    char penyanyi;
-    char durasi;
+    string id;
+    string judul;
+    string penyanyi;
+    string durasi;
 };
+
+typedef lagu infotype;
 
 struct elmlist {
     infotype info;
@@ -23,6 +26,10 @@ struct List {
     address last;
 };
 
-
+void createList(List &L);
+bool isEmpty(List L);
+address createElement(infotype x);
+void insertLast(List &L, address p);
+void addNewSong(List &L, infotype x);
 
 #endif // TUGAS_BESAR_H_INCLUDED
