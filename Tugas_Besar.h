@@ -26,12 +26,17 @@ struct List {
     address last;
 };
 
+void menu();
 void createList(List &L);
 bool isEmpty(List L);
 address createElement(infotype x);
 void insertLast(List &L, address p);
 void addNewSong(List &L, infotype x);
-
+address findSong(List L, string id);
+void deleteAddress(List &L, address p);
+void showAllSongs(List L);
+void updateSong(List &L);
+void deleteSong(List &L);
 void userSearchSong(List L);
 void playSong(address &p);
 void stopSong(address &p);
