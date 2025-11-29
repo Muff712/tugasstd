@@ -32,4 +32,13 @@ address createElement(infotype x);
 void insertLast(List &L, address p);
 void addNewSong(List &L, infotype x);
 
+void userSearchSong(List L);
+void playSong(address &current);
+void stopSong(address &current);
+void nextSong(address &current);
+void prevSong(address &current);
+void addToPlaylist(List &playlist, address song);
+void removeFromPlaylist(List &playlist);
+void showPlaylist(List playlist);
+
 #endif // TUGAS_BESAR_H_INCLUDED
