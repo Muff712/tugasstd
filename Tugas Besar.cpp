@@ -75,44 +75,44 @@ void userSearchSong(List L){
     }
 }
 
-void playSong(address &current){
-    if(current == nullptr){
+void playSong(address &p){
+    if(p == nullptr){
         cout << "Tidak ada lagu dipilih.\n";
         return;
     }
-    cout << "Memutar: " << current->info.judul << endl;
+    cout << "Memutar: " << p->info.judul << endl;
 }
-void stopSong(address &current){
-     if(current == nullptr){
+void stopSong(address &p){
+     if(p == nullptr){
         cout << "Tidak ada lagu yang sedang diputar.\n";
         return;
     }
     cout << "Lagu dihentikan.\n";
 }
 
-void nextSong(address &current){
-    if(current == nullptr){
+void nextSong(address &p){
+    if(p == nullptr){
         cout << "Tidak ada lagu yang sedang diputar.\n";
         return;
     }
 
-    if(current->next != nullptr){
-        current = current->next;
-        playSong(current);
+    if(p->next != nullptr){
+        p = p->next;
+        playSong(p);
     } else {
         cout << "Ini adalah lagu terakhir.\n";
     }
 }
 
-void prevSong(address &current){
-    if(current == nullptr){
+void prevSong(address &p){
+    if(p == nullptr){
         cout << "Tidak ada lagu yang sedang diputar.\n";
         return;
     }
 
-    if(current->prev != nullptr){
-        current = current->prev;
-        playSong(current);
+    if(p->prev != nullptr){
+        p = p->prev;
+        playSong(p);
     } else {
         cout << "Ini lagu pertama.\n";
     }
