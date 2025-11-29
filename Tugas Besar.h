@@ -33,10 +33,10 @@ void insertLast(List &L, address p);
 void addNewSong(List &L, infotype x);
 
 void userSearchSong(List L);
-void playSong(address &current);
-void stopSong(address &current);
-void nextSong(address &current);
-void prevSong(address &current);
+void playSong(address &p);
+void stopSong(address &p);
+void nextSong(address &p);
+void prevSong(address &p);
 void addToPlaylist(List &playlist, address song);
 void removeFromPlaylist(List &playlist);
 void showPlaylist(List playlist);
