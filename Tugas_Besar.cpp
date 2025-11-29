@@ -82,12 +82,10 @@ void deleteAddress(List &L, address p){
     if(p == nullptr) return;
     
     if(p == L.first && p == L.last){
-        // Only one element
         L.first = nullptr;
         L.last = nullptr;
     }
     else if(p == L.first){
-        // First element
         L.first = p->next;
         L.first->prev = nullptr;
     }
@@ -97,7 +95,6 @@ void deleteAddress(List &L, address p){
         L.last->next = nullptr;
     }
     else{
-        // Middle element
         p->prev->next = p->next;
         p->next->prev = p->prev;
     }

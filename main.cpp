@@ -13,14 +13,14 @@ int main(){
     createList(library);
     createList(playlist);
 
-    while(true){
+    while(true){ // disuruh pake looping sama AI, biar bisa balik ke menu utama tanpa restart katanya
         menu();
         cin >> pilihan;
 
         cout << endl;
         
         if (pilihan == "Admin" || pilihan == "admin" || pilihan == "1") {
-            int maunyaadmin = -1;
+            int maunyaadmin = -1; // ini yang buat biar enggak langsung keluar dari menu admin
             
             while(maunyaadmin != 0){
                 cout << "\n=== MENU ADMIN ===" << endl;
