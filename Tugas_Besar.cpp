@@ -90,7 +90,6 @@ void deleteAddress(List &L, address p){
         L.first->prev = nullptr;
     }
     else if(p == L.last){
-        // Last element
         L.last = p->prev;
         L.last->next = nullptr;
     }
