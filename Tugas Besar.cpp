@@ -60,3 +60,94 @@ void addNewSong(List &L, infotype x) {
     cout << "Lagu telah ditambahkan!";
 }
 
+
+void userSearchSong(List L){
+    string id;
+    cout << "Masukkan ID lagu: ";
+    cin >> id;
+
+    address p = findSong(L, id);
+    if(p == nullptr){
+        cout << "Lagu tidak ditemukan.\n";
+    }
+    else{
+        cout << "Ditemukan: " << p->info.judul << " - " << p->info.penyanyi << endl;
+    }
+}
+
+void playSong(address &current){
+    if(current == nullptr){
+        cout << "Tidak ada lagu dipilih.\n";
+        return;
+    }
+    cout << "Memutar: " << current->info.judul << endl;
+}
+void stopSong(address &current){
+     if(current == nullptr){
+        cout << "Tidak ada lagu yang sedang diputar.\n";
+        return;
+    }
+    cout << "Lagu dihentikan.\n";
+}
+
+void nextSong(address &current){
+    if(current == nullptr){
+        cout << "Tidak ada lagu yang sedang diputar.\n";
+        return;
+    }
+
+    if(current->next != nullptr){
+        current = current->next;
+        playSong(current);
+    } else {
+        cout << "Ini adalah lagu terakhir.\n";
+    }
+}
+
+void prevSong(address &current){
+    if(current == nullptr){
+        cout << "Tidak ada lagu yang sedang diputar.\n";
+        return;
+    }
+
+    if(current->prev != nullptr){
+        current = current->prev;
+        playSong(current);
+    } else {
+        cout << "Ini lagu pertama.\n";
+    }
+}
+
+void addToPlaylist(List &playlist, address song){
+    insertLast(playlist, createElement(song->info));
+    cout << "Lagu ditambahkan ke playlist!\n";
+}
+void removeFromPlaylist(List &playlist){
+    string id;
+    cout << "Masukkan ID lagu yang ingin dihapus dari playlist: ";
+    cin >> id;
+
+    address p = findSong(playlist, id);
+    if(p == nullptr){
+        cout << "Lagu tidak ditemukan di playlist.\n";
+        return;
+    }
+
+    deleteAddress(playlist, p);
+    cout << "Dihapus dari playlist.\n";
+}
+
+void showPlaylist(List playlist){
+    if(isEmpty(playlist)){
+        cout << "Playlist kosong.\n";
+        return;
+    }
+
+    address p = playlist.first;
+    while(p != nullptr){
+        cout << p->info.id << " | "
+             << p->info.judul << " - "
+             << p->info.penyanyi << endl;
+        p = p->next;
+    }
+}
