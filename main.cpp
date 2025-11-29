@@ -34,13 +34,19 @@ int main(){
     }
     }
 
+    int menu;
     if (siapa == "User" || siapa == "user") {
-    cout << "MENU USER" << endl;
-    cout << "1. Mencari lagu berdasarkan data" << endl;
-    cout << "2. Memutar lagu atau menghentikan lagu dari library maupun playlist" << endl;
-    cout << "3. Memutar lagu selanjutnya atau sebelumnya" << endl;
-    cout << "4. Menambahkan lagu baru ke playlist" << endl;
-    cout << "5. Menghapus lagu dari playlist" << endl;
-    cout << "6. Melihat isi lagi di playlist" << endl;
+    cout << "MENU USER\n" << endl;
+    cout << "1. Mencari lagu berdasarkan data\n" << endl;
+    cout << "2. Memutar lagu dari library maupun playlist\n" << endl;
+    cout << "3. Menghentikan lagu dari library maupun playlist\n" << endl;
+    cout << "4. Memutar lagu selanjutnya\n" << endl;
+    cout << "5. Memutar lagu sebelumnya\n" << endl;
+    cout << "6. Menambahkan lagu baru ke playlist\n" << endl;
+    cout << "7. Menghapus lagu dari playlist\n" << endl;
+    cout << "8. Melihat isi lagi di playlist\n" << endl;
+    cout << "0. Keluar\n" << endl;
+    cout << "Pilih: ";
+    cin >> menu;
     }
 }
