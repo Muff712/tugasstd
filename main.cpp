@@ -6,6 +6,7 @@ using namespace std;
 int main(){
     List library;      // Library untuk semua lagu
     List playlist;     // Playlist user
+    List favorite;     // Playlist favorit user
     address currentSong = nullptr;  // Untuk menyimpan lagu
     infotype lagu;
     string pilihan;
@@ -69,14 +70,43 @@ int main(){
                 if (maunyauser == 1) { 
                     userSearchSong(library);
                 } else if (maunyauser == 2) {
-                    string id;
-                    cout << "Masukkan ID lagu yang ingin diputar: ";
-                    cin >> id;
-                    currentSong = findSong(library, id);
-                    if(currentSong != nullptr){
-                        playSong(currentSong);
+                    int pilihan;
+                    cout << "Cari lagu berdasarkan:\n";
+                    cout << "1. Judul Lagu\n";
+                    cout << "2. ID Lagu\n";
+                    cout << "Pilih: ";
+                    cin >> pilihan;
+
+                    if(pilihan == 1){
+                        string judul;
+                        cout << "Masukkan judul lagu: ";
+                        cin >> judul;
+                        
+                        address temp = library.first;
+                        bool found = false;
+                        while(temp != nullptr && !found){
+                            if(temp->info.judul == judul){
+                                currentSong = temp;
+                                playSong(currentSong);
+                                found = true;
+                            }
+                            temp = temp->next;
+                        }
+                        if(!found){
+                            cout << "Lagu tidak ditemukan.\n";
+                        }
+                    } else if(pilihan == 2){
+                        string id;
+                        cout << "Masukkan ID lagu: ";
+                        cin >> id;
+                        currentSong = findSong(library, id);
+                        if(currentSong != nullptr){
+                            playSong(currentSong);
+                        } else {
+                            cout << "Lagu tidak ditemukan.\n";
+                        }
                     } else {
-                        cout << "Lagu tidak ditemukan.\n";
+                        cout << "Pilihan tidak valid.\n";
                     }
                 } else if (maunyauser == 3) {
                     stopSong(currentSong);
@@ -85,10 +115,36 @@ int main(){
                 } else if (maunyauser == 5) {
                     prevSong(currentSong);
                 } else if (maunyauser == 6) {
-                    string id;
-                    cout << "Masukkan ID lagu yang ingin ditambahkan ke playlist: ";
-                    cin >> id;
-                    address song = findSong(library, id);
+                    int pilihan;
+                    cout << "Cari lagu yang ingin ditambahkan ke playlist berdasarkan:\n";
+                    cout << "1. Judul Lagu\n";
+                    cout << "2. ID Lagu\n";
+                    cout << "Pilih: ";
+                    cin >> pilihan;
+
+                    address song = nullptr;
+
+                    if(pilihan == 1){
+                        string judul;
+                        cout << "Masukkan judul lagu: ";
+                        cin >> judul;
+                        
+                        address temp = library.first;
+                        while(temp != nullptr && song == nullptr){
+                            if(temp->info.judul == judul){
+                                song = temp;
+                            }
+                            temp = temp->next;
+                        }
+                    } else if(pilihan == 2){
+                        string id;
+                        cout << "Masukkan ID lagu: ";
+                        cin >> id;
+                        song = findSong(library, id);
+                    } else {
+                        cout << "Pilihan tidak valid.\n";
+                    }
+
                     if(song != nullptr){
                         addToPlaylist(playlist, song);
                     } else {
