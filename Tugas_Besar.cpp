@@ -164,10 +164,9 @@ void updateSong(List &L){
 
     cout << "\nMasukkan data baru:\n";
     cout << "Judul: ";
-    cin.ignore();
-    getline(cin, p->info.judul);
+    cin >> p->info.judul;
     cout << "Penyanyi: ";
-    getline(cin, p->info.penyanyi);
+    cin >> p->info.penyanyi;
     cout << "Durasi: ";
     cin >> p->info.durasi;
 
@@ -216,7 +215,6 @@ void deleteSong(List &L){
     deleteAddress(L, p);
     cout << "Lagu berhasil dihapus dari library!\n";
 }
-
 
 void userSearchSong(List L){
     int pilihan;
@@ -350,7 +348,6 @@ void removeFromPlaylist(List &playlist){
         return;
     }
 
-    address p = findSong(playlist, id);
     if(p == nullptr){
         cout << "Lagu tidak ditemukan di playlist.\n";
         return;

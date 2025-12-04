@@ -14,15 +14,15 @@ int main(){
     createList(library);
     createList(playlist);
 
-    while(true){ // disuruh pake looping sama AI, biar bisa balik ke menu utama tanpa restart katanya
+    while(true){
         menu();
         cin >> pilihan;
 
         cout << endl;
-        
+
         if (pilihan == "Admin" || pilihan == "admin" || pilihan == "1") {
             int maunyaadmin = -1; // ini yang buat biar enggak langsung keluar dari menu admin
-            
+
             while(maunyaadmin != 0){
                 cout << "\n=== MENU ADMIN ===" << endl;
                 cout << "1. Menambahkan lagu ke library" << endl;
@@ -30,6 +30,7 @@ int main(){
                 cout << "3. Mengubah data lagu di library" << endl;
                 cout << "4. Menghapus data lagu di library" << endl;
                 cout << "0. Kembali ke menu utama" << endl;
+                cout << "10. keluar apk";
                 cout << "Pilih: ";
                 cin >> maunyaadmin;
 
@@ -45,13 +46,14 @@ int main(){
                 } else if (maunyaadmin == 0) {
                     cout << "Kembali ke menu utama.\n";
                 } else {
-                    cout << "Pilihan tidak valid!\n";
+                    cout << "terimkasih telah menggunakan apk enggak jelas ini.\n";
+                    return 0;
                 }
             }
-        } 
+        }
         else if (pilihan == "User" || pilihan == "user" || pilihan == "2") {
             int maunyauser = -1;
-            
+
             while(maunyauser != 0){
                 cout << "\n=== MENU USER ===" << endl;
                 cout << "1. Mencari lagu berdasarkan ID" << endl;
@@ -63,11 +65,12 @@ int main(){
                 cout << "7. Menghapus lagu dari playlist" << endl;
                 cout << "8. Melihat isi playlist" << endl;
                 cout << "0. Kembali ke menu utama" << endl;
+                cout << "10. keluar apk";
                 cout << "Pilih: ";
                 cin >> maunyauser;
 
                 cout << endl;
-                if (maunyauser == 1) { 
+                if (maunyauser == 1) {
                     userSearchSong(library);
                 } else if (maunyauser == 2) {
                     int pilihan;
@@ -81,7 +84,7 @@ int main(){
                         string judul;
                         cout << "Masukkan judul lagu: ";
                         cin >> judul;
-                        
+
                         address temp = library.first;
                         bool found = false;
                         while(temp != nullptr && !found){
@@ -128,7 +131,7 @@ int main(){
                         string judul;
                         cout << "Masukkan judul lagu: ";
                         cin >> judul;
-                        
+
                         address temp = library.first;
                         while(temp != nullptr && song == nullptr){
                             if(temp->info.judul == judul){
@@ -166,7 +169,8 @@ int main(){
             return 0;
         }
         else {
-            cout << "Pilihan tidak valid!\n";
+            cout << "terimkasih telah menggunakan apk enggak jelas ini.\n";
+            return 0;
         }
     }
 
