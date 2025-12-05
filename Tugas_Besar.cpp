@@ -131,8 +131,7 @@ void updateSong(List &L){
     if(pilihan == 1){
         string judul;
         cout << "Masukkan judul lagu: ";
-        cin.ignore();
-        getline(cin, judul);
+        cin >> judul;
         
         address temp = L.first;
         while(temp != nullptr && p == nullptr){

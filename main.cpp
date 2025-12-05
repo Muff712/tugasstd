@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     List library;      // Library untuk semua lagu
     List playlist;     // Playlist user
-    List favorite;     // Playlist favorit user
+    List favorite;     // Playlist favorit user (blom diupdate)
     address currentSong = nullptr;  // Untuk menyimpan lagu
     infotype lagu;
     string pilihan;
@@ -176,3 +176,5 @@ int main(){
 
     return 0;
 }
+
+// fitur keluar disatuin
