@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Tugas_Besar.h"
+#include "Tugas Besar.h"
 
 using namespace std;
 
 void menu() {
-    cout << "=== MENU PENGGUNA ===" << endl;
+    cout << "============ MENU PENGGUNA ============" << endl;
     cout << "1. Admin" << endl;
     cout << "2. User" << endl;
     cout << "Siapa yang akan menggunakan aplikasi? ";
@@ -67,10 +67,11 @@ void addNewSong(List &L, infotype x) {
     cout << "Lagu telah ditambahkan!";
 }
 
-address findSong(List L, string id){
+address searchById(List L, string id){
     address p = L.first;
-    while(p != nullptr){
-        if(p->info.id == id){
+
+    while (p != nullptr){
+        if (p->info.id == id){
             return p;
         }
         p = p->next;
@@ -78,26 +79,60 @@ address findSong(List L, string id){
     return nullptr;
 }
 
+address searchByTitle(List L, string judul) {
+    address p = L.first;
+
+    while (p != nullptr){
+        if (p->info.judul == judul){
+            return p;
+        }
+        p = p->next;
+    }
+    return nullptr;
+}
+
+List searchBySinger(List L, string penyanyi) {
+    List lagupenyanyi;
+
+    createList(lagupenyanyi);
+
+    address p = L.first;
+    while (p!= nullptr) {
+        if (p->info.penyanyi == penyanyi) {
+            address newNode = createElement(p->info);
+            insertLast(lagupenyanyi, newNode);
+        }
+        p = p->next;
+    }
+    return lagupenyanyi;
+}
+
 void deleteAddress(List &L, address p){
-    if(p == nullptr) return;
-    
-    if(p == L.first && p == L.last){
+    if (p == nullptr) return;
+
+    if (p == L.first && p == L.last){
         L.first = nullptr;
         L.last = nullptr;
-    }
-    else if(p == L.first){
+    } else if (p == L.first){
         L.first = p->next;
         L.first->prev = nullptr;
-    }
-    else if(p == L.last){
+    } else if(p == L.last){
         L.last = p->prev;
         L.last->next = nullptr;
-    }
-    else{
+    } else {
         p->prev->next = p->next;
         p->next->prev = p->prev;
     }
     delete p;
+}
+
+void showSong(address p) {
+    if (p != nullptr) {
+        cout << "ID        : " << p->info.id << endl;
+        cout << "Judul     : " << p->info.judul << endl;
+        cout << "Penyanyi  : " << p->info.penyanyi << endl;
+        cout << "Durasi    : " << p->info.durasi << endl;
+    }
 }
 
 void showAllSongs(List L){
@@ -108,7 +143,7 @@ void showAllSongs(List L){
 
     address p = L.first;
     cout << "\n=== DAFTAR SEMUA LAGU ===\n";
-    while(p != nullptr){
+    while (p != nullptr){
         cout << "ID: " << p->info.id << endl;
         cout << "Judul: " << p->info.judul << endl;
         cout << "Penyanyi: " << p->info.penyanyi << endl;
@@ -120,37 +155,37 @@ void showAllSongs(List L){
 
 void updateSong(List &L){
     int pilihan;
-    cout << "Cari judlu lagu yang ingin diupdate:\n";
-    cout << "1. Judul Lagu\n";
-    cout << "2. ID Lagu\n";
+    cout << "Cari judul lagu yang ingin diupdate:\n";
+    cout << "1. Judul Lagu" << endl;
+    cout << "2. ID Lagu" << end;
     cout << "Pilih: ";
     cin >> pilihan;
 
     address p = nullptr;
 
-    if(pilihan == 1){
+    if (pilihan == 1){
         string judul;
         cout << "Masukkan judul lagu: ";
         cin >> judul;
-        
+
         address temp = L.first;
-        while(temp != nullptr && p == nullptr){
-            if(temp->info.judul == judul){
+        while (temp != nullptr && p == nullptr){
+            if (temp->info.judul == judul){
                 p = temp;
             }
             temp = temp->next;
         }
-    } else if(pilihan == 2){
+    } else if (pilihan == 2){
         string id;
         cout << "Masukkan ID lagu: ";
         cin >> id;
-        p = findSong(L, id);
+        p = searchById(L, id);
     } else {
         cout << "Pilihan tidak valid.\n";
         return;
     }
 
-    if(p == nullptr){
+    if (p == nullptr){
         cout << "Lagu tidak ditemukan.\n";
         return;
     }
@@ -182,88 +217,35 @@ void deleteSong(List &L){
 
     address p = nullptr;
 
-    if(pilihan == 1){
+    if (pilihan == 1){
         string judul;
         cout << "Masukkan judul lagu: ";
         cin.ignore();
         getline(cin, judul);
-        
+
         address temp = L.first;
-        while(temp != nullptr && p == nullptr){
-            if(temp->info.judul == judul){
+        while (temp != nullptr && p == nullptr){
+            if (temp->info.judul == judul){
                 p = temp;
             }
             temp = temp->next;
         }
-    } else if(pilihan == 2){
+    } else if (pilihan == 2){
         string id;
         cout << "Masukkan ID lagu: ";
         cin >> id;
-        p = findSong(L, id);
+        p = searchById(L, id);
     } else {
         cout << "Pilihan tidak valid.\n";
         return;
     }
-
-    if(p == nullptr){
+    if( p == nullptr){
         cout << "Lagu tidak ditemukan.\n";
         return;
     }
-
     cout << "Menghapus lagu: " << p->info.judul << " - " << p->info.penyanyi << endl;
     deleteAddress(L, p);
     cout << "Lagu berhasil dihapus dari library!\n";
-}
-
-void userSearchSong(List L){
-    int pilihan;
-    cout << "Cari berdasarkan:\n";
-    cout << "1. Judul Lagu\n";
-    cout << "2. ID Lagu\n";
-    cout << "Pilih: ";
-    cin >> pilihan;
-
-    address p = L.first;
-    bool found = false;
-
-    if(pilihan == 1){
-        string judul;
-        cout << "Masukkan judul lagu: ";
-        cin.ignore();
-        getline(cin, judul);
-        
-        while(p != nullptr){
-            if(p->info.judul.find(judul) != string::npos){
-                cout << "\nDitemukan:\n";
-                cout << "ID: " << p->info.id << endl;
-                cout << "Judul: " << p->info.judul << endl;
-                cout << "Penyanyi: " << p->info.penyanyi << endl;
-                cout << "Durasi: " << p->info.durasi << endl;
-                cout << "-------------------------\n";
-                found = true;
-            }
-            p = p->next;
-        }
-        if(!found){
-            cout << "Lagu tidak ditemukan.\n";
-        }
-    } else if(pilihan == 2){
-        string id;
-        cout << "Masukkan ID lagu: ";
-        cin >> id;
-        p = findSong(L, id);
-        if(p != nullptr){
-            cout << "\nDitemukan:\n";
-            cout << "ID: " << p->info.id << endl;
-            cout << "Judul: " << p->info.judul << endl;
-            cout << "Penyanyi: " << p->info.penyanyi << endl;
-            cout << "Durasi: " << p->info.durasi << endl;
-        } else {
-            cout << "Lagu tidak ditemukan.\n";
-        }
-    } else {
-        cout << "Pilihan tidak valid.\n";
-    }
 }
 
 void playSong(address &p){
@@ -278,8 +260,9 @@ void stopSong(address &p){
      if(p == nullptr){
         cout << "Tidak ada lagu yang sedang diputar.\n";
         return;
+    } else {
+        cout << "Lagu dihentikan.\n";
     }
-    cout << "Lagu dihentikan.\n";
 }
 
 void nextSong(address &p){
@@ -288,7 +271,7 @@ void nextSong(address &p){
         return;
     }
 
-    if(p->next != nullptr){
+    if (p->next != nullptr){
         p = p->next;
         playSong(p);
     } else {
@@ -297,12 +280,12 @@ void nextSong(address &p){
 }
 
 void prevSong(address &p){
-    if(p == nullptr){
+    if (p == nullptr){
         cout << "Tidak ada lagu yang sedang diputar.\n";
         return;
     }
 
-    if(p->prev != nullptr){
+    if (p->prev != nullptr){
         p = p->prev;
         playSong(p);
     } else {
@@ -312,26 +295,26 @@ void prevSong(address &p){
 
 void addToPlaylist(List &playlist, address song){
     insertLast(playlist, createElement(song->info));
-    cout << "Lagu ditambahkan ke playlist!\n";
+    cout << "Lagu telah ditambahkan ke playlist!\n";
 }
 void removeFromPlaylist(List &playlist){
     int pilihan;
     cout << "Cari lagu yang ingin dihapus dari playlist berdasarkan:\n";
-    cout << "1. Judul Lagu\n";
-    cout << "2. ID Lagu\n";
+    cout << "1. Judul Lagu" << endl;
+    cout << "2. ID Lagu"<< endl;
     cout << "Pilih: ";
     cin >> pilihan;
 
     address p = nullptr;
 
-    if(pilihan == 1){
+    if (pilihan == 1){
         string judul;
         cout << "Masukkan judul lagu: ";
         cin.ignore();
         getline(cin, judul);
-        
+
         address temp = playlist.first;
-        while(temp != nullptr && p == nullptr){
+        while (temp != nullptr && p == nullptr){
             if(temp->info.judul == judul){
                 p = temp;
             }
@@ -341,7 +324,7 @@ void removeFromPlaylist(List &playlist){
         string id;
         cout << "Masukkan ID lagu: ";
         cin >> id;
-        p = findSong(playlist, id);
+        p = searchById(playlist, id);
     } else {
         cout << "Pilihan tidak valid.\n";
         return;
@@ -369,4 +352,8 @@ void showPlaylist(List playlist){
              << p->info.penyanyi << endl;
         p = p->next;
     }
+}
+
+void likedSongs(List &L, List &F) {
+
 }
