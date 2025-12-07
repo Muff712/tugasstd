@@ -1,3 +1,4 @@
+
 #ifndef TUGAS_BESAR_H_INCLUDED
 #define TUGAS_BESAR_H_INCLUDED
 #include <iostream>
@@ -32,8 +33,11 @@ bool isEmpty(List L);
 address createElement(infotype x);
 void insertLast(List &L, address p);
 void addNewSong(List &L, infotype x);
-address findSong(List L, string id);
+address searchById(List L, string id);
+address searchByTitle(List L, string judul);
+List searchBySinger(List L, string penyanyi);
 void deleteAddress(List &L, address p);
+void showSong(address p);
 void showAllSongs(List L);
 void updateSong(List &L);
 void deleteSong(List &L);
@@ -45,5 +49,7 @@ void prevSong(address &p);
 void addToPlaylist(List &playlist, address song);
 void removeFromPlaylist(List &playlist);
 void showPlaylist(List playlist);
+void likedSongs(List &L, List &F);
+void showLikedSongs(List F);
 
 #endif // TUGAS_BESAR_H_INCLUDED
