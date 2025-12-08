@@ -49,19 +49,19 @@ void addNewSong(List &L, infotype x) {
     cin >> x.id;
 
     while (x.id != "Selesai" && x.id != "selesai") {
-        cout << "Masukkan Judul Lagu: ";
+        cout << "Masukkan judul lagu: ";
         cin >> x.judul;
 
-        cout << "Masukkan Penyanyi Lagu: ";
+        cout << "Masukkan penyanyi lagu: ";
         cin >> x.penyanyi;
 
-        cout << "Masukkan Durasi Lagu: ";
+        cout << "Masukkan durasi lagu: ";
         cin >> x.durasi;
 
         address p = createElement(x);
         insertLast(L, p);
 
-        cout << "Masukkan ID Lagu: ";
+        cout << "Masukkan ID lagu: ";
         cin >> x.id;
     }
     cout << "Lagu telah ditambahkan!";
@@ -116,7 +116,7 @@ void deleteAddress(List &L, address p){
     } else if (p == L.first){
         L.first = p->next;
         L.first->prev = nullptr;
-    } else if(p == L.last){
+    } else if (p == L.last){
         L.last = p->prev;
         L.last->next = nullptr;
     } else {
@@ -138,65 +138,44 @@ void showSong(address p) {
 void showAllSongs(List L){
     if(isEmpty(L)){
         cout << "Library kosong.\n";
-        return;
     }
-
     address p = L.first;
-    cout << "\n=== DAFTAR SEMUA LAGU ===\n";
+
+    cout << "\n======= DAFTAR SEMUA LAGU =======\n";
+
     while (p != nullptr){
-        cout << "ID: " << p->info.id << endl;
-        cout << "Judul: " << p->info.judul << endl;
-        cout << "Penyanyi: " << p->info.penyanyi << endl;
-        cout << "Durasi: " << p->info.durasi << endl;
-        cout << "-------------------------\n";
+        cout << "ID        : " << p->info.id << endl;
+        cout << "Judul     : " << p->info.judul << endl;
+        cout << "Penyanyi  : " << p->info.penyanyi << endl;
+        cout << "Durasi    : " << p->info.durasi << endl;
+        cout << "-----------------------------------\n";
+
         p = p->next;
     }
 }
 
 void updateSong(List &L){
-    int pilihan;
-    cout << "Cari judul lagu yang ingin diupdate:\n";
-    cout << "1. Judul Lagu" << endl;
-    cout << "2. ID Lagu" << end;
-    cout << "Pilih: ";
-    cin >> pilihan;
+    string pilihan;
+    string id;
 
     address p = nullptr;
 
-    if (pilihan == 1){
-        string judul;
-        cout << "Masukkan judul lagu: ";
-        cin >> judul;
+    cout << "Masukkan ID lagu: ";
+    cin >> id;
+    p = searchById(L, id);
 
-        address temp = L.first;
-        while (temp != nullptr && p == nullptr){
-            if (temp->info.judul == judul){
-                p = temp;
-            }
-            temp = temp->next;
-        }
-    } else if (pilihan == 2){
-        string id;
-        cout << "Masukkan ID lagu: ";
-        cin >> id;
-        p = searchById(L, id);
-    } else {
-        cout << "Pilihan tidak valid.\n";
-        return;
-    }
-
-    if (p == nullptr){
+    if( p == nullptr){
         cout << "Lagu tidak ditemukan.\n";
-        return;
     }
-
     cout << "\nData lagu saat ini:\n";
-    cout << "ID: " << p->info.id << endl;
-    cout << "Judul: " << p->info.judul << endl;
-    cout << "Penyanyi: " << p->info.penyanyi << endl;
-    cout << "Durasi: " << p->info.durasi << endl;
+    cout << "ID        : " << p->info.id << endl;
+    cout << "Judul     : " << p->info.judul << endl;
+    cout << "Penyanyi  : " << p->info.penyanyi << endl;
+    cout << "Durasi    : " << p->info.durasi << endl;
 
     cout << "\nMasukkan data baru:\n";
+    cout << "ID: ";
+    cin >> p->info.id;
     cout << "Judul: ";
     cin >> p->info.judul;
     cout << "Penyanyi: ";
@@ -209,39 +188,16 @@ void updateSong(List &L){
 
 void deleteSong(List &L){
     int pilihan;
-    cout << "Cari lagu yang ingin dihapus berdasarkan:\n";
-    cout << "1. Judul Lagu\n";
-    cout << "2. ID Lagu\n";
-    cout << "Pilih: ";
-    cin >> pilihan;
+    string id;
 
     address p = nullptr;
 
-    if (pilihan == 1){
-        string judul;
-        cout << "Masukkan judul lagu: ";
-        cin.ignore();
-        getline(cin, judul);
+    cout << "Masukkan ID lagu: ";
+    cin >> id;
+    p = searchById(L, id);
 
-        address temp = L.first;
-        while (temp != nullptr && p == nullptr){
-            if (temp->info.judul == judul){
-                p = temp;
-            }
-            temp = temp->next;
-        }
-    } else if (pilihan == 2){
-        string id;
-        cout << "Masukkan ID lagu: ";
-        cin >> id;
-        p = searchById(L, id);
-    } else {
-        cout << "Pilihan tidak valid.\n";
-        return;
-    }
     if( p == nullptr){
         cout << "Lagu tidak ditemukan.\n";
-        return;
     }
     cout << "Menghapus lagu: " << p->info.judul << " - " << p->info.penyanyi << endl;
     deleteAddress(L, p);
