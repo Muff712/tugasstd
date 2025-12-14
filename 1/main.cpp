@@ -17,6 +17,7 @@ int main() {
         cout << "0. Keluar\n";
         cout << "Pilih: ";
         cin >> pilihan;
+        cin.ignore();
 
         if (pilihan == "1") {
             if (loginAdmin()) {

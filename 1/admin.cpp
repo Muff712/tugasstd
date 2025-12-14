@@ -3,7 +3,8 @@
 bool loginAdmin() {
     string password;
     cout << "Masukkan password admin: ";
-    cin >> password;
+    cin.ignore();
+    getline(cin, password);
     
     if (password == "bukankah ini mykisah") {
         cout << "Login admin berhasil.\n";
@@ -25,6 +26,7 @@ void menuAdmin(List &library) {
         cout << "0. Logout\n";
         cout << "Pilih: ";
         cin >> pilih;
+        cin.ignore();
 
         if (pilih == 1) {
             showAllSongs(library);
@@ -34,13 +36,13 @@ void menuAdmin(List &library) {
             infotype x;
 
             cout << "Masukkan ID Lagu    : ";
-            cin >> x.id;
+            getline(cin, x.id);
             cout << "Masukkan Judul Lagu : ";
-            cin >> x.judul;
+            getline(cin, x.judul);
             cout << "Masukkan Penyanyi   : ";
-            cin >> x.penyanyi;
+            getline(cin, x.penyanyi);
             cout << "Masukkan Durasi     : ";
-            cin >> x.durasi;
+            getline(cin, x.durasi);
 
             address cek = searchById(library, x.id);
 
@@ -56,7 +58,7 @@ void menuAdmin(List &library) {
         else if (pilih == 3) {
             string id;
             cout << "Masukkan ID lagu: ";
-            cin >> id;
+            getline(cin, id);
 
             address target = searchById(library, id);
 

@@ -2,7 +2,8 @@
 
 bool loginUser(string &username) {
     cout << "Masukkan username: ";
-    cin >> username;
+    cin.ignore();
+    getline(cin, username);
     cout << "Login berhasil sebagai " << username << endl;
     return true;
 }
@@ -32,6 +33,7 @@ void menuUser(List &library, List &favorite, List &queue) {
         cout << "0. Logout\n";
         cout << "Pilih: ";
         cin >> pilih;
+        cin.ignore();
 
         if (pilih == 1) {
             showAllSongs(library);
@@ -40,7 +42,7 @@ void menuUser(List &library, List &favorite, List &queue) {
         else if (pilih == 2) {
             string judul;
             cout << "Masukkan judul lagu: ";
-            cin >> judul;
+            getline(cin, judul);
 
             currentSong = searchByTitle(library, judul);
 
