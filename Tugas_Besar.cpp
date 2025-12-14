@@ -321,46 +321,26 @@ void addToPlaylist(List &playlist, address song){
     insertLast(playlist, createElement(song->info));
     cout << "Lagu telah ditambahkan ke playlist!\n";
 }
-void removeFromPlaylist(List &playlist){
-    int pilihan;
-    cout << "Cari lagu yang ingin dihapus dari playlist berdasarkan:\n";
-    cout << "1. Judul Lagu" << endl;
-    cout << "2. ID Lagu"<< endl;
-    cout << "Pilih: ";
-    cin >> pilihan;
 
-    address p = nullptr;
-
-    if (pilihan == 1){
-        string judul;
-        cout << "Masukkan judul lagu: ";
-        cin.ignore();
-        getline(cin, judul);
-
-        address temp = playlist.first;
-        while (temp != nullptr && p == nullptr){
-            if(temp->info.judul == judul){
-                p = temp;
-            }
-            temp = temp->next;
-        }
-    } else if(pilihan == 2){
-        string id;
-        cout << "Masukkan ID lagu: ";
-        cin >> id;
-        p = searchById(playlist, id);
-    } else {
-        cout << "Pilihan tidak valid.\n";
+void removeFromPlaylist(List &playlist) {
+    if (isEmpty(playlist)) {
+        cout << "Playlist kosong.\n";
         return;
     }
 
-    if(p == nullptr){
+    string id;
+    cout << "Masukkan ID lagu yang akan dihapus: ";
+    cin >> id;
+
+    address p = searchById(playlist, id);
+
+    if (p == nullptr) {
         cout << "Lagu tidak ditemukan di playlist.\n";
         return;
     }
 
     deleteAddress(playlist, p);
-    cout << "Dihapus dari playlist.\n";
+    cout << "Lagu berhasil dihapus dari playlist.\n";
 }
 
 void showPlaylist(List playlist){
