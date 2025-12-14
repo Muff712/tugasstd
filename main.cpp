@@ -182,7 +182,7 @@ int main() {
             cout << "      Aplikasi Music Player \n";
             cout << "  Sampai jumpa di lain waktu!\n";
             cout << "====================================\n";
-        running = false; // ❗ STOP PROGRAM}
+        running = false; // STOP PROGRAM
         }
     }
     return 0;
